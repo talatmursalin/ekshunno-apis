@@ -33,13 +33,15 @@ router.post('/code/submit', (req: Request, res: Response) => {
             }
             channel.assertQueue(queueName, { durable: true });
             channel.sendToQueue(queueName, Buffer.from(JSON.stringify(msg)));
-            conn.close();
+            setTimeout(() => {
+                conn.close();
+            }, 500);
             res.status(200).json({
                 submissionRoom: roomName,
                 message: 'Submission queued'
-            })
+            });
         });
-    })
-})
+    });
+});
 
 export default router;
