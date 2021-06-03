@@ -32,10 +32,13 @@
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "mongoose": "^5.12.12",
+    "morgan": "^1.10.0",
     "rimraf": "^3.0.2",
+    "socket.io": "^4.1.2",
     "typescript": "^4.3.2"
   },
   "devDependencies": {
+    "@types/morgan": "^1.9.2",
     "nodemon": "^2.0.7",
     "ts-node": "^10.0.0"
   }

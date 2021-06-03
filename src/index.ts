@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import helmet from 'helmet';
+import morgan from 'morgan';
 // routes
 import TestRoutes from './routes/test';
 import IndexRoutes from './routes/index';
@@ -8,9 +9,10 @@ import AdminRoutes from './routes/admin';
 
 const app = express();
 
+app.use(morgan('combined'));
 app.use(helmet());
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // use routes
