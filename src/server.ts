@@ -4,6 +4,7 @@ import http from 'http';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { Server, Socket } from 'socket.io';
+import amqp from 'amqplib/callback_api';
 
 dotenv.config();
 
@@ -25,7 +26,7 @@ server.listen(PORT);
 
 io.on('connection', (socket: Socket) => {
     console.log('client connected: ' + socket.id);
-    socketConnectionHandler(socket);
+    socketConnectionHandler(io, socket);
 });
 
 server.on('error', (err) => {
