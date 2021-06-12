@@ -15,7 +15,7 @@ export function socketConnectionHandler(io: Server, socket: Socket) {
                     if (err) {
                         throw err;
                     }
-                    ch.assertQueue(roomId, { durable: true });
+                    ch.assertQueue(roomId, { durable: false });
                     ch.consume(roomId, (msg) => {
                         const m = msg!.content.toString();
                         // console.log('Message received from RMQ');

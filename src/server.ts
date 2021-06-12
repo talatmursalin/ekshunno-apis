@@ -1,12 +1,8 @@
 import app from './index';
 import { socketConnectionHandler } from './socket'
 import http from 'http';
-import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { Server, Socket } from 'socket.io';
-import amqp from 'amqplib/callback_api';
-
-dotenv.config();
 
 mongoose.connect(process.env.MONGO_DB_CONNECTION!, {
     useNewUrlParser: true,
@@ -20,7 +16,12 @@ mongoose.connect(process.env.MONGO_DB_CONNECTION!, {
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: process.env.ALLOWED_HOST,
+        credentials: true
+    },
+});
 
 server.listen(PORT);
 

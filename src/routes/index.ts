@@ -31,10 +31,11 @@ router.post('/code/submit', (req: Request, res: Response) => {
                 submissionRoom: roomName,
                 submission: req.body.submission,
             }
-            channel.assertQueue(queueName, { durable: true });
+            channel.assertQueue(queueName, { durable: false });
             channel.sendToQueue(queueName, Buffer.from(JSON.stringify(msg)));
             setTimeout(() => {
                 conn.close();
+                console.log('Submission sent to queue');
             }, 500);
             res.status(200).json({
                 submissionRoom: roomName,

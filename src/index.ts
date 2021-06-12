@@ -1,4 +1,6 @@
 import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
 import path from 'path';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -7,9 +9,12 @@ import TestRoutes from './routes/test';
 import IndexRoutes from './routes/index';
 import AdminRoutes from './routes/admin';
 
+dotenv.config();
+
 const app = express();
 
 app.use(morgan('combined'));
+app.use(cors({ origin: process.env.ALLOWED_HOST }))
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
