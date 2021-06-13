@@ -20,10 +20,12 @@ router.post('/code/submit', (req: Request, res: Response) => {
     amqp.connect(process.env.RMQ_CONNECTION!, (err, conn) => {
         if (err) {
             res.status(500).json(err);
+            return
         }
         conn.createChannel((chErr, channel) => {
             if (chErr) {
                 res.status(500).json(err);
+                return
             }
             const queueName: string = process.env.RMQ_SUBMISSION_CHANNEL!;
             const roomName = getRandomName(5);
@@ -31,10 +33,11 @@ router.post('/code/submit', (req: Request, res: Response) => {
                 submissionRoom: roomName,
                 submission: req.body.submission,
             }
-            channel.assertQueue(queueName, { durable: true });
+            channel.assertQueue(queueName, { durable: false });
             channel.sendToQueue(queueName, Buffer.from(JSON.stringify(msg)));
             setTimeout(() => {
                 conn.close();
+                console.log('Submission sent to queue');
             }, 500);
             res.status(200).json({
                 submissionRoom: roomName,

@@ -6,7 +6,6 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "serve": "nodemon --watch './**/*.ts' --exec 'ts-node' src/server.ts",
-    "prestart": "npm run build",
     "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,14 +27,18 @@
     "@types/express": "^4.17.12",
     "@types/node": "^15.6.1",
     "amqplib": "^0.8.0",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "mongoose": "^5.12.12",
+    "morgan": "^1.10.0",
     "rimraf": "^3.0.2",
+    "socket.io": "^4.1.2",
     "typescript": "^4.3.2"
   },
   "devDependencies": {
+    "@types/morgan": "^1.9.2",
     "nodemon": "^2.0.7",
     "ts-node": "^10.0.0"
   }
