@@ -6,7 +6,8 @@ import { Server, Socket } from 'socket.io';
 
 mongoose.connect(process.env.MONGO_DB_CONNECTION!, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    dbName: process.env.MONGO_DB_DATABASE
 },
     () => {
         console.log('connected to database');
